@@ -10,16 +10,21 @@ class HmMoreList extends StatefulWidget {
 class _HmMoreListState extends State<HmMoreList> {
   @override
   Widget build(BuildContext context) {
-    //必须是Sliver家族组件
     return SliverGrid.builder(
-      //网格是2列
-    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 2,mainAxisSpacing: 10,crossAxisSpacing: 10), 
-    itemBuilder: (BuildContext context,int index){
+      itemCount: 20,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 0.75,
+      ),
+      itemBuilder: (BuildContext context, int index) {
         return Container(
-          child: Text("商品",style: TextStyle(color: Colors.white),),
           color: Colors.blue,
           alignment: Alignment.center,
+          child: Text("商品$index", style: TextStyle(color: Colors.white)),
         );
-    });
+      },
+    );
   }
 }

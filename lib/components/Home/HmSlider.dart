@@ -1,20 +1,40 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:hm_shop/viewmodels/home.dart';
 
 class HmSlider extends StatefulWidget {
-  HmSlider({Key? key}) : super(key: key);
+  final List<BannerItem> bannerList;
+  HmSlider({Key? key,required this.bannerList}) : super(key: key);
 
   @override
   _HmSliderState createState() => _HmSliderState();
 }
 
 class _HmSliderState extends State<HmSlider> {
+  Widget _getSlider(){
+    //在flutter获取屏幕宽度的方法
+    // final double screenWidth = MediaQuery.of(context).size.width;//屏幕宽度
+    //返回轮播图插件
+    //根据数据渲染不同的轮播选项
+    return CarouselSlider(items: List.generate(widget.bannerList.length, 
+    (int index){
+      return Image.network(widget.bannerList[index].imgUrl, fit: BoxFit.cover,width: 350,);
+    }), options: CarouselOptions(
+      viewportFraction: 1,
+      autoPlay: true
+      ));
+  }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 300,
-      color: Colors.blue,
-      alignment: Alignment.center,
-       child: Text('轮播图',style: TextStyle(color: Colors.white,fontSize: 20)),
+    //Stack -> 轮播图 搜索框 指示灯导航
+    return Stack(
+      children: [_getSlider()],
     );
+    // return Container(
+    //   height: 300,
+    //   color: Colors.blue,
+    //   alignment: Alignment.center,
+    //    child: Text('轮播图',style: TextStyle(color: Colors.white,fontSize: 20)),
+    // );
   }
 }
