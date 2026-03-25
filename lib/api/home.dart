@@ -5,7 +5,20 @@ import 'package:hm_shop/viewmodels/home.dart';
 
 Future<List<BannerItem>> getBannerListAPI ()async{
   //返回请求
-  return (await dioRequest.get(HttpConstants.BANNER_LIST) as List).map((item){
-    BannerItem.formJSON(item as Map<String, dynamic>);
+ return ((await dioRequest.get(HttpConstants.BANNER_LIST) ) as List).map((item){
+    return BannerItem.fromJSON(item as Map<String, dynamic>);
+  }).toList() ;
+}
+
+// Future<List<BannerItem>> getBannerListAPI(){
+//   //返回请求
+  
+// }
+
+//获取分类列表
+Future<List<CategoryItem>> getCategoryListAPI ()async{
+  //返回请求
+ return ((await dioRequest.get(HttpConstants.CATEGORY_LIST) ) as List).map((item){
+    return CategoryItem.fromJSON(item as Map<String, dynamic>);
   }).toList() ;
 }

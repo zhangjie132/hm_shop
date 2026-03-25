@@ -35,6 +35,7 @@ class DioRequest {
 Future<dynamic> get(String url,{Map<String, dynamic>? params}){
     return  _handleResponse (_dio.get(url,queryParameters: params));
   }
+
 //进一步处理返回结果的函数
 Future<dynamic> _handleResponse(Future<Response<dynamic>> task) async {
   try {
@@ -42,7 +43,7 @@ Future<dynamic> _handleResponse(Future<Response<dynamic>> task) async {
   final data = res.data as Map<String, dynamic>;//data才是真实的接口返回的数据
   if(data["code"] == GlobalConstants.SUCCESS_CODE){
     //才认定 http状态和业务状态均正常 就可以放行
-    return data["result"];
+    return data["result"];//只要result结果
   }
   //抛出异常
   // throw Exception(data["msg"]?? "数据加载异常");
